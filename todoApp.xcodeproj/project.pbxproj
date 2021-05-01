@@ -3,27 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C6C86716263D2AAB005661B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C86715263D2AAB005661B4 /* AppDelegate.swift */; };
 		C6C86718263D2AAB005661B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C86717263D2AAB005661B4 /* SceneDelegate.swift */; };
-		C6C8671A263D2AAB005661B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C86719263D2AAB005661B4 /* ViewController.swift */; };
+		C6C8671A263D2AAB005661B4 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C86719263D2AAB005661B4 /* TodoViewController.swift */; };
 		C6C8671D263D2AAB005661B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C8671B263D2AAB005661B4 /* Main.storyboard */; };
 		C6C8671F263D2AB0005661B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6C8671E263D2AB0005661B4 /* Assets.xcassets */; };
 		C6C86722263D2AB0005661B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C86720263D2AB0005661B4 /* LaunchScreen.storyboard */; };
+		C6C8672F263D31EA005661B4 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = C6C8672E263D31EA005661B4 /* Reusable */; };
+		C6C86733263D31F5005661B4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = C6C86732263D31F5005661B4 /* Then */; };
+		C6C86739263D382B005661B4 /* TodoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6C86738263D382B005661B4 /* TodoCell.xib */; };
+		C6C8673C263D383A005661B4 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8673B263D383A005661B4 /* TodoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C6C86712263D2AAB005661B4 /* todoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C86715263D2AAB005661B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6C86717263D2AAB005661B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C6C86719263D2AAB005661B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C6C86719263D2AAB005661B4 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		C6C8671C263D2AAB005661B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C6C8671E263D2AB0005661B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6C86721263D2AB0005661B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6C86723263D2AB0005661B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6C86738263D382B005661B4 /* TodoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoCell.xib; sourceTree = "<group>"; };
+		C6C8673B263D383A005661B4 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6C8672F263D31EA005661B4 /* Reusable in Frameworks */,
+				C6C86733263D31F5005661B4 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,9 +73,10 @@
 		C6C8672B263D2CB9005661B4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C6C86737263D3812005661B4 /* Parts */,
 				C6C86715263D2AAB005661B4 /* AppDelegate.swift */,
 				C6C86717263D2AAB005661B4 /* SceneDelegate.swift */,
-				C6C86719263D2AAB005661B4 /* ViewController.swift */,
+				C6C86719263D2AAB005661B4 /* TodoViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -81,6 +90,15 @@
 				C6C86720263D2AB0005661B4 /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		C6C86737263D3812005661B4 /* Parts */ = {
+			isa = PBXGroup;
+			children = (
+				C6C86738263D382B005661B4 /* TodoCell.xib */,
+				C6C8673B263D383A005661B4 /* TodoCell.swift */,
+			);
+			path = Parts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +117,10 @@
 			dependencies = (
 			);
 			name = todoApp;
+			packageProductDependencies = (
+				C6C8672E263D31EA005661B4 /* Reusable */,
+				C6C86732263D31F5005661B4 /* Then */,
+			);
 			productName = todoApp;
 			productReference = C6C86712263D2AAB005661B4 /* todoApp.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +148,10 @@
 				Base,
 			);
 			mainGroup = C6C86709263D2AAB005661B4;
+			packageReferences = (
+				C6C8672D263D31EA005661B4 /* XCRemoteSwiftPackageReference "Reusable" */,
+				C6C86731263D31F5005661B4 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = C6C86713263D2AAB005661B4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,6 +169,7 @@
 				C6C86722263D2AB0005661B4 /* LaunchScreen.storyboard in Resources */,
 				C6C8671F263D2AB0005661B4 /* Assets.xcassets in Resources */,
 				C6C8671D263D2AAB005661B4 /* Main.storyboard in Resources */,
+				C6C86739263D382B005661B4 /* TodoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,9 +180,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6C8671A263D2AAB005661B4 /* ViewController.swift in Sources */,
+				C6C8671A263D2AAB005661B4 /* TodoViewController.swift in Sources */,
 				C6C86716263D2AAB005661B4 /* AppDelegate.swift in Sources */,
 				C6C86718263D2AAB005661B4 /* SceneDelegate.swift in Sources */,
+				C6C8673C263D383A005661B4 /* TodoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +331,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = todoApp/Info.plist;
+				INFOPLIST_FILE = todoApp/Assets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,7 +349,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = todoApp/Info.plist;
+				INFOPLIST_FILE = todoApp/Assets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -355,6 +383,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C6C8672D263D31EA005661B4 /* XCRemoteSwiftPackageReference "Reusable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/Reusable.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.1;
+			};
+		};
+		C6C86731263D31F5005661B4 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6C8672E263D31EA005661B4 /* Reusable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6C8672D263D31EA005661B4 /* XCRemoteSwiftPackageReference "Reusable" */;
+			productName = Reusable;
+		};
+		C6C86732263D31F5005661B4 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6C86731263D31F5005661B4 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C6C8670A263D2AAB005661B4 /* Project object */;
 }
