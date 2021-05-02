@@ -10,7 +10,13 @@ import Reusable
 
 final class TodoViewController: UITableViewController {
   
-  private let todoList = (1...20).map { "todo \($0)" }
+  private let todoList = (1...20).map {
+    Todo.init(
+      title: "todo\($0)",
+      memo: "todo\($0)",
+      deadline: Date()
+    )
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,7 +29,7 @@ final class TodoViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(for: indexPath) as TodoCell
-    cell.configure(title: todoList[indexPath.row])
+    cell.configure(title: todoList[indexPath.row].title)
     return cell
   }
 }
