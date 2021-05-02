@@ -23,7 +23,7 @@ final class TodoViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(for: indexPath) as TodoCell
-    cell.configure(title: String("todo\(indexPath.row)"))
+    cell.configure(title: todoList[indexPath.row])
     return cell
   }
 }

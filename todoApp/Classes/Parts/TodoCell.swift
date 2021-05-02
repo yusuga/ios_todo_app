@@ -11,8 +11,33 @@ import Reusable
 
 final class TodoCell: UITableViewCell, NibReusable {
   @IBOutlet private weak var titleLabel: UILabel!
+  @IBOutlet private weak var checkButton: UIButton!
+  
+  private var isChecked = false {
+    didSet {
+      if isChecked {
+        checkButton.setImage(
+          UIImage(
+            systemName: "checkmark.circle.fill",
+            withConfiguration: UIImage.SymbolConfiguration(scale: .large)),
+          for: .normal
+        )
+      } else {
+        checkButton.setImage(
+          UIImage(
+            systemName: "circle",
+            withConfiguration: UIImage.SymbolConfiguration(scale: .large)),
+          for: .normal
+        )
+      }
+    }
+  }
   
   func configure(title: String) {
     titleLabel?.text = title
+  }
+  
+  @IBAction func buttonTapped(_ sender: UIButton) {
+    isChecked = !isChecked
   }
 }
