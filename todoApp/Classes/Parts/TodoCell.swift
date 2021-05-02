@@ -19,14 +19,14 @@ final class TodoCell: UITableViewCell, NibReusable {
         checkButton.setImage(
           UIImage(
             systemName: "checkmark.circle.fill",
-            withConfiguration: UIImage.SymbolConfiguration(scale: .large)),
+            withConfiguration: UIImage.SymbolConfiguration(scale: .medium)),
           for: .normal
         )
       } else {
         checkButton.setImage(
           UIImage(
             systemName: "circle",
-            withConfiguration: UIImage.SymbolConfiguration(scale: .large)),
+            withConfiguration: UIImage.SymbolConfiguration(scale: .medium)),
           for: .normal
         )
       }

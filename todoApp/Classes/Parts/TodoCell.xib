@@ -28,21 +28,21 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                    <imageReference key="image" image="circle" catalog="system" symbolScale="medium"/>
                                 </state>
                                 <connections>
                                     <action selector="buttonTapped:" destination="hCh-fW-qPY" eventType="touchUpInside" id="bGW-dw-df7"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPY-QJ-tr1">
-                                <rect key="frame" x="34" y="14.5" width="369" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="32" y="15.5" width="371" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="QPY-QJ-tr1" firstAttribute="leading" secondItem="h2B-8c-b1F" secondAttribute="trailing" constant="10" id="efU-2p-FbN"/>
+                            <constraint firstItem="QPY-QJ-tr1" firstAttribute="leading" secondItem="h2B-8c-b1F" secondAttribute="trailing" constant="8" id="efU-2p-FbN"/>
                             <constraint firstAttribute="height" constant="50" id="nUc-e9-TIj"/>
                         </constraints>
                     </stackView>
