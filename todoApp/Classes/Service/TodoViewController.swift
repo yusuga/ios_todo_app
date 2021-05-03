@@ -10,8 +10,8 @@ import Reusable
 
 final class TodoViewController: UITableViewController {
   
-  private let todoList = (1...20).map {
-    Todo.init(
+  private var todoList = (1...20).map {
+    Todo(
       title: "todo\($0)",
       memo: "todo\($0)",
       deadline: Date()
@@ -32,4 +32,21 @@ final class TodoViewController: UITableViewController {
     cell.configure(title: todoList[indexPath.row].title)
     return cell
   }
+  
+//  @IBAction func addTodo(_ sender: Any) {
+//    // データソースの更新
+//    todoList.append(
+//      Todo(
+//        title: "hogehoge",
+//        memo: "hogehoge",
+//        deadline: Date()
+//      )
+//    )
+//    
+//    // UIの更新
+//    tableView.insertRows(
+//      at: [IndexPath(row: todoList.count - 1, section: 0)],
+//      with: .automatic
+//    )
+//  }
 }
