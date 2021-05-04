@@ -144,12 +144,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="詳細" id="Npf-FT-vk1">
-                        <barButtonItem key="rightBarButtonItem" title="完了" id="jpL-v8-RRE"/>
+                        <barButtonItem key="rightBarButtonItem" title="完了" id="jpL-v8-RRE">
+                            <connections>
+                                <action selector="updateTodo:" destination="Yad-1A-1Ng" id="eqe-mo-88W"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="deadlineDatePicker" destination="n1s-fl-vZj" id="a7d-LM-dBa"/>
                         <outlet property="memoTextView" destination="OSx-vY-TiY" id="Mdk-YZ-AAt"/>
                         <outlet property="titleLabel" destination="CHt-mw-La2" id="VUf-mk-Eqw"/>
+                        <outlet property="updateButton" destination="jpL-v8-RRE" id="RTJ-oK-nz7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7NG-iQ-Pgw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

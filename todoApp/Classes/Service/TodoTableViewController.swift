@@ -65,7 +65,8 @@ final class TodoTableViewController: UITableViewController, TodoAddingDelegatePr
     Todo.save(todoList: todoList)
   }
   
-  func updateTodo(todo: Todo) {
-    print("updated")
+  func updateTodo() {
+    Todo.save(todoList: todoList)
+    tableView.reloadData()
   }
 }
