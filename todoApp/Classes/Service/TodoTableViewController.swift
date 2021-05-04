@@ -8,7 +8,7 @@
 import UIKit
 import Reusable
 
-final class TodoViewController: UITableViewController, TodoAddingDelegateProtocol {
+final class TodoTableViewController: UITableViewController, TodoAddingDelegateProtocol, TodoUpdatingDelegateProtocol {
   
   // MARK: Properties
   private var todoList = [Todo]()
@@ -32,11 +32,24 @@ final class TodoViewController: UITableViewController, TodoAddingDelegateProtoco
     return cell
   }
   
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let todo = todoList[indexPath.row]
+    performSegue(withIdentifier: "showTodoSegue", sender: todo)
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "addTodoSegue" {
+    switch segue.identifier {
+    case "addTodoSegue":
       let navC = segue.destination as! UINavigationController
       let newTodoVC = navC.topViewController as! NewTodoViewController
       newTodoVC.delegate = self
+    case "showTodoSegue":
+      if let showTodoVC = segue.destination as? ShowTodoViewController, let todo = sender as? Todo {
+        showTodoVC.delegate = self
+        showTodoVC.todo = todo
+      }
+    default:
+      fatalError()
     }
   }
   
@@ -50,5 +63,9 @@ final class TodoViewController: UITableViewController, TodoAddingDelegateProtoco
     
     // Userdefaultに保存
     Todo.save(todoList: todoList)
+  }
+  
+  func updateTodo(todo: Todo) {
+    print("updated")
   }
 }

@@ -11,7 +11,7 @@ final class Todo: NSObject, NSCoding {
   
   var title: String
   var memo: String?
-  var deadline: Date?
+  var deadline: Date
   var is_done: Bool
   static private let key = "todoList"
   static private var userDefaults: UserDefaults { UserDefaults.standard }
