@@ -49,6 +49,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C6BA078F2640108900C7DEEA /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		C6C86709263D2AAB005661B4 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +84,7 @@
 		C6C8672B263D2CB9005661B4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C6BA078F2640108900C7DEEA /* Protocol */,
 				C6C86741263E7991005661B4 /* Model */,
 				C6C86740263E7978005661B4 /* Service */,
 				C6C86737263D3812005661B4 /* Parts */,

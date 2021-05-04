@@ -8,7 +8,7 @@
 import UIKit
 import Reusable
 
-final class TodoViewController: UITableViewController {
+final class TodoViewController: UITableViewController, TodoAddingDelegateProtocol {
   
   private var todoList = (1...20).map {
     Todo(
@@ -33,20 +33,19 @@ final class TodoViewController: UITableViewController {
     return cell
   }
   
-//  @IBAction func addTodo(_ sender: Any) {
-//    // データソースの更新
-//    todoList.append(
-//      Todo(
-//        title: "hogehoge",
-//        memo: "hogehoge",
-//        deadline: Date()
-//      )
-//    )
-//    
-//    // UIの更新
-//    tableView.insertRows(
-//      at: [IndexPath(row: todoList.count - 1, section: 0)],
-//      with: .automatic
-//    )
-//  }
+  func addTodo(todo: Todo) {
+    todoList.append(todo)
+    tableView.insertRows(
+      at: [IndexPath(row: todoList.count - 1, section: 0)],
+      with: .automatic
+    )
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "addTodoSegue" {
+      let navC = segue.destination as! UINavigationController
+      let newTodoVC = navC.topViewController as! NewTodoViewController
+      newTodoVC.delegate = self
+    }
+  }
 }

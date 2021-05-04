@@ -10,7 +10,6 @@
         <!--タスク-->
         <scene sceneID="ZU8-P5-sIw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h9b-FM-aWr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Txw-Dw-Hjq" customClass="TodoViewController" customModule="todoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="69k-HM-WF5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -24,11 +23,12 @@
                     <navigationItem key="navigationItem" title="タスク" id="co5-Yx-eSs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Vf2-Bf-iP4">
                             <connections>
-                                <segue destination="IXv-vX-yd6" kind="presentation" id="htK-sw-cbA"/>
+                                <segue destination="IXv-vX-yd6" kind="presentation" identifier="addTodoSegue" id="htK-sw-cbA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h9b-FM-aWr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="380" y="673"/>
         </scene>
@@ -164,12 +164,15 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="追加" id="7Uu-es-sKu">
                             <connections>
-                                <action selector="saveTodo:" destination="fJg-xk-wqB" id="zkq-w1-vBh"/>
+                                <action selector="addTodo:" destination="fJg-xk-wqB" id="Dn7-Gh-3WA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="7Uu-es-sKu" id="sUw-Z8-aby"/>
+                        <outlet property="deadlineDatePicker" destination="zog-lz-uPf" id="ek0-CR-pbE"/>
                         <outlet property="memoTextView" destination="sh9-Jb-aEC" id="RK4-e1-j3v"/>
+                        <outlet property="titleLabel" destination="Nso-fB-tYk" id="2Xc-Kx-JMY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J3T-7o-w5Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
