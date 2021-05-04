@@ -37,6 +37,21 @@ final class TodoTableViewController: UITableViewController, TodoAddingDelegatePr
     performSegue(withIdentifier: "showTodoSegue", sender: todo)
   }
   
+  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    switch editingStyle {
+    case .delete:
+      todoList.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .automatic)
+      Todo.save(todoList: todoList)
+    default:
+      break
+    }
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case "addTodoSegue":
