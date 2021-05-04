@@ -10,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="112" id="hCh-fW-qPY" customClass="TodoCell" customModule="todoApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="423" height="53"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="253" id="hCh-fW-qPY" customClass="TodoCell" customModule="todoApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="194"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hCh-fW-qPY" id="555-04-iXQ">
-                <rect key="frame" x="0.0" y="0.0" width="423" height="53"/>
+                <rect key="frame" x="0.0" y="0.0" width="423" height="194"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="u30-Cy-VXX">
@@ -28,14 +28,17 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="circle" catalog="system" symbolScale="medium"/>
+                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
                                     <action selector="buttonTapped:" destination="hCh-fW-qPY" eventType="touchUpInside" id="bGW-dw-df7"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPY-QJ-tr1">
-                                <rect key="frame" x="32" y="15.5" width="371" height="19.5"/>
+                                <rect key="frame" x="32" y="13" width="371" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="1AV-CJ-J3t"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -58,7 +61,7 @@
                 <outlet property="checkButton" destination="h2B-8c-b1F" id="oJl-h1-Pak"/>
                 <outlet property="titleLabel" destination="QPY-QJ-tr1" id="yYL-cM-5kW"/>
             </connections>
-            <point key="canvasLocation" x="-1654.3478260869567" y="-88.058035714285708"/>
+            <point key="canvasLocation" x="-1654.3478260869567" y="-40.848214285714285"/>
         </tableViewCell>
     </objects>
     <resources>
