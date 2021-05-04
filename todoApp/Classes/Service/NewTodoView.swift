@@ -14,6 +14,7 @@ protocol TodoAddingDelegateProtocol {
 
 final class NewTodoViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
   
+  // MARK: Properties
   var delegate: TodoAddingDelegateProtocol? = nil
   
   @IBOutlet private weak var titleLabel: UITextField!
@@ -21,6 +22,7 @@ final class NewTodoViewController: UITableViewController, UITextViewDelegate, UI
   @IBOutlet private weak var deadlineDatePicker: UIDatePicker!
   @IBOutlet private weak var addButton: UIBarButtonItem!
   
+  // MARK: ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -32,6 +34,7 @@ final class NewTodoViewController: UITableViewController, UITextViewDelegate, UI
     addButton.isEnabled = false
   }
   
+  // MARK: Actions
   @IBAction func cancel(_ sender: Any) {
     self.dismiss(animated: true)
   }
@@ -54,7 +57,8 @@ final class NewTodoViewController: UITableViewController, UITextViewDelegate, UI
     }
   }
   
-  func textFieldDidEndEditing(_ textField: UITextField) {
+  // MARK: Delegates
+  func textFieldDidChangeSelection(_ textField: UITextField) {
     updateAddButtonState()
   }
   
@@ -73,6 +77,7 @@ final class NewTodoViewController: UITableViewController, UITextViewDelegate, UI
     }
   }
   
+  // MARK: Methods
   private func updateAddButtonState() {
     let text = titleLabel.text ?? ""
     addButton.isEnabled = !text.isEmpty
