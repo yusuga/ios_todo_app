@@ -13,6 +13,8 @@ final class Todo: NSObject, NSCoding {
   var memo: String?
   var deadline: Date?
   var is_done: Bool
+  static private let key = "todoList"
+  static private var userDefaults: UserDefaults { UserDefaults.standard }
   
   init(title: String, memo: String, deadline: Date, is_done: Bool = false) {
     self.title = title
@@ -47,6 +49,28 @@ final class Todo: NSObject, NSCoding {
     coder.encode(memo, forKey: "memo")
     coder.encode(deadline, forKey: "deadline")
     coder.encode(is_done, forKey: "is_done")
+  }
+  
+  // MARK: Methods
+  
+  // MARK: StaticMethods
+  static func all() -> [Todo] {
+    guard let data = userDefaults.data(forKey: key),
+          let todoList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Todo]
+    else {
+      return []
+    }
+    
+    return todoList
+  }
+  
+  static func save(todoList: [Todo]) {
+    // Userdefaultに保存
+    let data = try! NSKeyedArchiver.archivedData(
+      withRootObject: todoList,
+      requiringSecureCoding: false
+    )
+    Todo.userDefaults.set(data, forKey: Todo.key)
   }
 }
 

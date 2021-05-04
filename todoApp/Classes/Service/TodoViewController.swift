@@ -12,22 +12,13 @@ final class TodoViewController: UITableViewController, TodoAddingDelegateProtoco
   
   // MARK: Properties
   private var todoList = [Todo]()
-  private var userDefaults: UserDefaults { UserDefaults.standard }
-  private let key = "todoList"
   
   // MARK: ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.register(cellType: TodoCell.self)
-    
-    guard let data = userDefaults.data(forKey: key),
-          let todoList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Todo]
-    else {
-      print("data: nil")
-      return
-    }
 
-    self.todoList = todoList
+    todoList = Todo.all()
   }
   
   // MARK: Delegates
@@ -58,10 +49,6 @@ final class TodoViewController: UITableViewController, TodoAddingDelegateProtoco
     )
     
     // Userdefaultに保存
-    let data = try! NSKeyedArchiver.archivedData(
-      withRootObject: todoList,
-      requiringSecureCoding: false
-    )
-    userDefaults.set(data, forKey: key)
+    Todo.save(todoList: todoList)
   }
 }
