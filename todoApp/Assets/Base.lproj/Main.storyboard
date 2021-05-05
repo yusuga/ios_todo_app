@@ -23,7 +23,7 @@
                     <navigationItem key="navigationItem" title="タスク" id="co5-Yx-eSs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Vf2-Bf-iP4">
                             <connections>
-                                <segue destination="IXv-vX-yd6" kind="presentation" identifier="addTodoSegue" id="htK-sw-cbA"/>
+                                <segue destination="IXv-vX-yd6" kind="presentation" identifier="" id="htK-sw-cbA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

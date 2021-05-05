@@ -8,17 +8,17 @@
 import UIKit
 import Reusable
 
-final class TodoTableViewController: UITableViewController, TodoAddingDelegateProtocol, TodoUpdatingDelegateProtocol {
+final class TodoTableViewController: UITableViewController, TodoUpdatingDelegateProtocol {
   
   // MARK: Properties
-  private var todoList = [Todo]()
+  private var todoList = Todo.list // これは配列なので値渡し
   
   // MARK: ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     tableView.register(cellType: TodoCell.self)
-
-    todoList = Todo.all()
+    NotificationCenter.default.addObserver(self, selector: #selector(updateTodoList), name: .updateTodoList, object: nil)
   }
   
   override func awakeFromNib() {
@@ -72,44 +72,27 @@ final class TodoTableViewController: UITableViewController, TodoAddingDelegatePr
     return false
   }
   
-  override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    return .none
-  }
-  
   override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
     return proposedDestinationIndexPath
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    switch segue.identifier {
-    case "addTodoSegue":
-      let navC = segue.destination as! UINavigationController
-      let newTodoVC = navC.topViewController as! NewTodoViewController
-      newTodoVC.delegate = self
-    case "showTodoSegue":
+    if segue.identifier == "showTodoSegue" {
       if let showTodoVC = segue.destination as? ShowTodoViewController, let todo = sender as? Todo {
         showTodoVC.delegate = self
         showTodoVC.todo = todo
       }
-    default:
-      fatalError()
     }
   }
   
   // MARK: Methods
-  func addTodo(todo: Todo) {
-    todoList.append(todo)
-    tableView.insertRows(
-      at: [IndexPath(row: todoList.count - 1, section: 0)],
-      with: .automatic
-    )
-    
-    // Userdefaultに保存
-    Todo.save(todoList: todoList)
-  }
-  
   func updateTodo() {
     Todo.save(todoList: todoList)
+    tableView.reloadData()
+  }
+  
+  @objc private func updateTodoList() {
+    todoList = Todo.list
     tableView.reloadData()
   }
 }

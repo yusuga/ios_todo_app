@@ -8,14 +8,9 @@
 import Foundation
 import UIKit
 
-protocol TodoAddingDelegateProtocol {
-  func addTodo(todo: Todo)
-}
-
 final class NewTodoViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
   
   // MARK: Properties
-  var delegate: TodoAddingDelegateProtocol? = nil
   
   @IBOutlet private weak var titleLabel: UITextField!
   @IBOutlet private weak var memoTextView: UITextView!
@@ -41,18 +36,19 @@ final class NewTodoViewController: UITableViewController, UITextViewDelegate, UI
   
   @IBAction func addTodo(_ sender: Any) {
     // TodoViewControllerに新しいタスクを渡す
-    if delegate != nil && titleLabel.text?.isEmpty == false {
+    if titleLabel.text?.isEmpty == false {
       // プレースホルダーの場合はnilにする
       if memoTextView.textColor == UIColor.lightGray {
         memoTextView.text = nil
       }
+      
       let todo = Todo(
         title: titleLabel.text!,
         memo: memoTextView.text,
         deadline: deadlineDatePicker.date
       )
       
-      delegate!.addTodo(todo: todo)
+      Todo.add(todo)
       dismiss(animated: true, completion: nil)
     }
   }

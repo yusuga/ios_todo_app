@@ -13,8 +13,6 @@ final class Todo: NSObject, NSCoding {
   var memo: String?
   var deadline: Date
   var is_done: Bool
-  static private let key = "todoList"
-  static private var userDefaults: UserDefaults { UserDefaults.standard }
   
   init(title: String, memo: String, deadline: Date, is_done: Bool = false) {
     self.title = title
@@ -53,7 +51,29 @@ final class Todo: NSObject, NSCoding {
   
   // MARK: Methods
   
-  // MARK: StaticMethods
+  // MARK: Static
+  static private let key = "todoList"
+  static private var userDefaults: UserDefaults { UserDefaults.standard }
+  static var list = all()
+  
+  static func save(todoList: [Todo]) {
+    // Userdefaultに保存
+    let data = try! NSKeyedArchiver.archivedData(
+      withRootObject: todoList,
+      requiringSecureCoding: false
+    )
+    Todo.userDefaults.set(data, forKey: Todo.key)
+  }
+  
+  private static func save2() {
+    let data = try! NSKeyedArchiver.archivedData(
+      withRootObject: list,
+      requiringSecureCoding: false
+    )
+    Todo.userDefaults.set(data, forKey: key)
+    NotificationCenter.default.post(name: .updateTodoList, object: nil)
+  }
+  
   static func all() -> [Todo] {
     guard let data = userDefaults.data(forKey: key),
           let todoList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Todo]
@@ -64,13 +84,8 @@ final class Todo: NSObject, NSCoding {
     return todoList
   }
   
-  static func save(todoList: [Todo]) {
-    // Userdefaultに保存
-    let data = try! NSKeyedArchiver.archivedData(
-      withRootObject: todoList,
-      requiringSecureCoding: false
-    )
-    Todo.userDefaults.set(data, forKey: Todo.key)
+  static func add(_ todo: Todo) {
+    Todo.list.append(todo)
+    save2()
   }
 }
-

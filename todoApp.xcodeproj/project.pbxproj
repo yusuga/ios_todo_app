@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C6515C642641294E0090B37A /* ShowTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515C632641294E0090B37A /* ShowTodoViewController.swift */; };
+		C6515C6E2642845A0090B37A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515C6D2642845A0090B37A /* Extension.swift */; };
 		C6BA078D263FCF3B00C7DEEA /* NewTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA078C263FCF3B00C7DEEA /* NewTodoViewController.swift */; };
 		C6C86716263D2AAB005661B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C86715263D2AAB005661B4 /* AppDelegate.swift */; };
 		C6C86718263D2AAB005661B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C86717263D2AAB005661B4 /* SceneDelegate.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		C6515C632641294E0090B37A /* ShowTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTodoViewController.swift; sourceTree = "<group>"; };
+		C6515C6D2642845A0090B37A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		C6BA078C263FCF3B00C7DEEA /* NewTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTodoViewController.swift; sourceTree = "<group>"; };
 		C6C86712263D2AAB005661B4 /* todoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C86715263D2AAB005661B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C6515C6B264284380090B37A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C6515C6D2642845A0090B37A /* Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C6BA078F2640108900C7DEEA /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +96,7 @@
 		C6C8672B263D2CB9005661B4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C6515C6B264284380090B37A /* Extension */,
 				C6BA078F2640108900C7DEEA /* Protocol */,
 				C6C86741263E7991005661B4 /* Model */,
 				C6C86740263E7978005661B4 /* Service */,
@@ -220,6 +231,7 @@
 				C6BA078D263FCF3B00C7DEEA /* NewTodoViewController.swift in Sources */,
 				C6C8673C263D383A005661B4 /* TodoCell.swift in Sources */,
 				C6C86743263E79B1005661B4 /* Todo.swift in Sources */,
+				C6515C6E2642845A0090B37A /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
