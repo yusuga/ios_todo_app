@@ -21,6 +21,12 @@ final class TodoTableViewController: UITableViewController, TodoAddingDelegatePr
     todoList = Todo.all()
   }
   
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    navigationItem.leftBarButtonItem = editButtonItem
+  }
+  
   // MARK: Delegates
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     todoList.count
@@ -50,6 +56,28 @@ final class TodoTableViewController: UITableViewController, TodoAddingDelegatePr
     default:
       break
     }
+  }
+  
+  override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    let removedTodo = todoList.remove(at: sourceIndexPath.row)
+    todoList.insert(removedTodo, at: destinationIndexPath.row)
+    Todo.save(todoList: todoList)
+  }
+  
+  override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+    return false
+  }
+  
+  override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return .none
+  }
+  
+  override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+    return proposedDestinationIndexPath
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
