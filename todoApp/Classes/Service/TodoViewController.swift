@@ -1,5 +1,5 @@
 //
-//  ShowTodoViewController.swift
+//  TodoViewController.swift
 //  todoApp
 //
 //  Created by 早瀬 和輝 on 2021/05/04.
@@ -12,7 +12,7 @@ protocol TodoUpdatingDelegateProtocol {
   func updateTodo()
 }
 
-final class ShowTodoViewController: UITableViewController, UITextFieldDelegate {
+final class TodoViewController: UITableViewController, UITextFieldDelegate {
   
   // MARK: Properties
   var delegate: TodoUpdatingDelegateProtocol? = nil
@@ -43,7 +43,7 @@ final class ShowTodoViewController: UITableViewController, UITextFieldDelegate {
   // MARK: Actions
   @IBAction func updateTodo(_ sender: Any) {
     if delegate != nil && titleLabel.text?.isEmpty == false {
-      if let todo = self.todo, let title = titleLabel.text {
+      if var todo = self.todo, let title = titleLabel.text {
         todo.title = title
         todo.memo = memoTextView.text
         todo.deadline = deadlineDatePicker.date

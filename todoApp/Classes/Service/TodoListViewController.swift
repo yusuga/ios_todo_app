@@ -8,11 +8,8 @@
 import UIKit
 import Reusable
 
-final class TodoTableViewController: UITableViewController, TodoUpdatingDelegateProtocol {
-  
-  // MARK: Properties
-  private var todoList = Todo.list // これは配列なので値渡し
-  
+final class TodoListViewController: UITableViewController, TodoUpdatingDelegateProtocol {
+    
   // MARK: ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,17 +26,17 @@ final class TodoTableViewController: UITableViewController, TodoUpdatingDelegate
   
   // MARK: Delegates
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    todoList.count
+    Database.shared.todoList.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(for: indexPath) as TodoCell
-    cell.configure(title: todoList[indexPath.row].title)
+    cell.configure(title: Database.shared.todoList[indexPath.row].title)
     return cell
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let todo = todoList[indexPath.row]
+    let todo = Database.shared.todoList[indexPath.row]
     performSegue(withIdentifier: "showTodoSegue", sender: todo)
   }
   
@@ -50,9 +47,10 @@ final class TodoTableViewController: UITableViewController, TodoUpdatingDelegate
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     switch editingStyle {
     case .delete:
-      todoList.remove(at: indexPath.row)
+      Database.shared.deleteTodo(
+        Database.shared.todoList[indexPath.row]
+      )
       tableView.deleteRows(at: [indexPath], with: .automatic)
-      Todo.save(todoList: todoList)
     default:
       break
     }
@@ -63,9 +61,10 @@ final class TodoTableViewController: UITableViewController, TodoUpdatingDelegate
   }
   
   override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    let removedTodo = todoList.remove(at: sourceIndexPath.row)
-    todoList.insert(removedTodo, at: destinationIndexPath.row)
-    Todo.save(todoList: todoList)
+    Database.shared.moveTodo(
+      from: sourceIndexPath.row,
+      to: destinationIndexPath.row
+    )
   }
   
   override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -78,7 +77,7 @@ final class TodoTableViewController: UITableViewController, TodoUpdatingDelegate
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showTodoSegue" {
-      if let showTodoVC = segue.destination as? ShowTodoViewController, let todo = sender as? Todo {
+      if let showTodoVC = segue.destination as? TodoViewController, let todo = sender as? Todo {
         showTodoVC.delegate = self
         showTodoVC.todo = todo
       }
@@ -87,12 +86,10 @@ final class TodoTableViewController: UITableViewController, TodoUpdatingDelegate
   
   // MARK: Methods
   func updateTodo() {
-    Todo.save(todoList: todoList)
     tableView.reloadData()
   }
   
   @objc private func updateTodoList() {
-    todoList = Todo.list
     tableView.reloadData()
   }
 }

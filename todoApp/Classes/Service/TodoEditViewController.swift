@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class NewTodoViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
+final class TodoEditViewController: UITableViewController, UITextViewDelegate, UITextFieldDelegate {
   
   // MARK: Properties
   
@@ -48,7 +48,7 @@ final class NewTodoViewController: UITableViewController, UITextViewDelegate, UI
         deadline: deadlineDatePicker.date
       )
       
-      Todo.add(todo)
+      Database.shared.add(todo)
       dismiss(animated: true, completion: nil)
     }
   }
