@@ -8,7 +8,7 @@
 import UIKit
 import Reusable
 
-final class TodoListViewController: UITableViewController, TodoUpdatingDelegateProtocol {
+final class TodoListViewController: UITableViewController {
     
   // MARK: ViewDidLoad
   override func viewDidLoad() {
@@ -31,7 +31,7 @@ final class TodoListViewController: UITableViewController, TodoUpdatingDelegateP
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(for: indexPath) as TodoCell
-    cell.configure(title: Database.shared.todoList[indexPath.row].title)
+    cell.configure(todo: Database.shared.todoList[indexPath.row])
     return cell
   }
   
@@ -78,16 +78,12 @@ final class TodoListViewController: UITableViewController, TodoUpdatingDelegateP
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showTodoSegue" {
       if let showTodoVC = segue.destination as? TodoViewController, let todo = sender as? Todo {
-        showTodoVC.delegate = self
         showTodoVC.todo = todo
       }
     }
   }
   
   // MARK: Methods
-  func updateTodo() {
-    tableView.reloadData()
-  }
   
   @objc private func updateTodoList() {
     tableView.reloadData()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,18 +13,17 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="111" id="hCh-fW-qPY" customClass="TodoCell" customModule="todoApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="423" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hCh-fW-qPY" id="555-04-iXQ">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hCh-fW-qPY" id="555-04-iXQ">
                 <rect key="frame" x="0.0" y="0.0" width="423" height="52"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="u30-Cy-VXX">
-                        <rect key="frame" x="20" y="0.0" width="403" height="50"/>
+                        <rect key="frame" x="20" y="0.0" width="403" height="52"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2B-8c-b1F">
-                                <rect key="frame" x="0.0" y="13" width="24" height="24"/>
+                                <rect key="frame" x="0.0" y="14" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="dSb-WE-kVx"/>
-                                    <constraint firstAttribute="height" constant="24" id="jPU-6o-GWt"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                 <state key="normal">
@@ -35,7 +34,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPY-QJ-tr1">
-                                <rect key="frame" x="32" y="15.5" width="371" height="19.5"/>
+                                <rect key="frame" x="32" y="4" width="371" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="4cj-OV-QS0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -43,7 +45,6 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="QPY-QJ-tr1" firstAttribute="leading" secondItem="h2B-8c-b1F" secondAttribute="trailing" constant="8" id="efU-2p-FbN"/>
-                            <constraint firstAttribute="height" constant="50" id="nUc-e9-TIj"/>
                         </constraints>
                     </stackView>
                 </subviews>

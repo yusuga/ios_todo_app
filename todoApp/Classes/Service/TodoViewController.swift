@@ -8,14 +8,9 @@
 import Foundation
 import UIKit
 
-protocol TodoUpdatingDelegateProtocol {
-  func updateTodo()
-}
-
 final class TodoViewController: UITableViewController, UITextFieldDelegate {
   
   // MARK: Properties
-  var delegate: TodoUpdatingDelegateProtocol? = nil
   var todo: Todo? = nil
   
   @IBOutlet private weak var titleLabel: UITextField!
@@ -42,16 +37,20 @@ final class TodoViewController: UITableViewController, UITextFieldDelegate {
   
   // MARK: Actions
   @IBAction func updateTodo(_ sender: Any) {
-    if delegate != nil && titleLabel.text?.isEmpty == false {
-      if var todo = self.todo, let title = titleLabel.text {
-        todo.title = title
-        todo.memo = memoTextView.text
-        todo.deadline = deadlineDatePicker.date
-
-        delegate!.updateTodo()
-        self.navigationController?.popViewController(animated: true)
-      }
+    guard titleLabel.text?.isEmpty == false,
+          var todo = self.todo, let title = titleLabel.text
+    else {
+      fatalError()
     }
+    
+    todo.title = title
+    todo.memo = memoTextView.text
+    todo.deadline = deadlineDatePicker.date
+    
+    Database.shared.update(todo)
+    NotificationCenter.default.post(name: .updateTodoList, object: nil)
+    
+    navigationController?.popViewController(animated: true)
   }
   
   // MARK: Methods

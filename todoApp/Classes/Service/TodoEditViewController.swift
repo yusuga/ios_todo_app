@@ -49,6 +49,8 @@ final class TodoEditViewController: UITableViewController, UITextViewDelegate, U
       )
       
       Database.shared.add(todo)
+      NotificationCenter.default.post(name: .updateTodoList, object: nil)
+
       dismiss(animated: true, completion: nil)
     }
   }

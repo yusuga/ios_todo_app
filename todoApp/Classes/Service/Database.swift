@@ -13,7 +13,7 @@ final class Database {
   
   private(set) var todoList: [Todo] {
     didSet {
-      NotificationCenter.default.post(name: .updateTodoList, object: nil)
+      saveTodoList()
     }
   }
   
@@ -42,15 +42,47 @@ final class Database {
     )
   }
   
+  func add(_ todo: Todo) {
+    todoList.append(todo)
+  }
+  
+  func update(_ newTodo: Todo) {
+    guard let index = todoList.firstIndex(where: { $0.id == newTodo.id }) else {
+      fatalError()
+    }
+    todoList.remove(at: index)
+    todoList.insert(newTodo, at: index)
+    
+    // 配列内のstructを直接変更
+//    todoList[index].title = newTodo.title
+//    todoList[index].memo = newTodo.memo
+//    todoList[index].deadline = newTodo.deadline
+//    todoList[index].isDone = newTodo.isDone
+    
+    
+    // NG
+//    guard var oldTodo = todoList.first(where: { $0.id == newTodo.id }) else {
+//      return
+//    }
+//    oldTodo.title = newTodo.title
+  }
+  
+  func setIsDone(_ isDone: Bool, for id: UUID) {
+    guard let index = todoList.firstIndex(where: { $0.id == id }) else {
+      fatalError()
+    }
+    print("id: \(id), \(isDone)")
+    todoList[index].isDone = isDone
+  }
+}
+
+private extension Database {
+  
   func saveTodoList() {
     // Userdefaultに保存
     try! UserDefaults.standard.set(
       JSONEncoder().encode(todoList),
       forKey: key
-    )
-  }
-  
-  func add(_ todo: Todo) {
-    todoList.append(todo)
+    )    
   }
 }

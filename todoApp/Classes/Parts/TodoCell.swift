@@ -12,10 +12,11 @@ import Reusable
 final class TodoCell: UITableViewCell, NibReusable {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var checkButton: UIButton!
+  private var id: UUID?
   
-  private var isChecked = false {
+  private var isDone = false {
     didSet {
-      if isChecked {
+      if isDone {
         checkButton.setImage(
           UIImage(
             systemName: "checkmark.circle.fill",
@@ -33,11 +34,15 @@ final class TodoCell: UITableViewCell, NibReusable {
     }
   }
   
-  func configure(title: String) {
-    titleLabel?.text = title
+  func configure(todo: Todo) {
+    self.id = todo.id
+    titleLabel?.text = todo.title
+    isDone = todo.isDone
   }
   
   @IBAction func buttonTapped(_ sender: UIButton) {
-    isChecked = !isChecked
+    isDone.toggle()
+    guard let id = id else { return }
+    Database.shared.setIsDone(isDone, for: id)
   }
 }
