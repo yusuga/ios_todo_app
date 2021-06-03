@@ -6,10 +6,17 @@
 //
 
 import Foundation
+import RealmSwift
 
 final class Database {
   
   static var shared = Database()
+  private let realmConfiguration = Realm.Configuration(
+    schemaVersion: 1,
+    objectTypes: [
+      Todo.self
+    ]
+  )
   
   private(set) var todoList: [Todo] {
     didSet {
@@ -18,7 +25,7 @@ final class Database {
   }
   
   private init() {
-    if let data = UserDefaults.standard.data(forKey: key) {
+    if let json = UserDefaults.standard.string(forKey: key), let data = json.data(using: .utf8) {
       todoList = try! JSONDecoder().decode([Todo].self, from: data)
     } else {
       todoList = []
@@ -53,17 +60,14 @@ final class Database {
     todoList.remove(at: index)
     todoList.insert(newTodo, at: index)
     
-    // 配列内のstructを直接変更
+    // 別案: 配列内のstructを直接変更
 //    todoList[index].title = newTodo.title
 //    todoList[index].memo = newTodo.memo
 //    todoList[index].deadline = newTodo.deadline
 //    todoList[index].isDone = newTodo.isDone
     
-    
-    // NG
-//    guard var oldTodo = todoList.first(where: { $0.id == newTodo.id }) else {
-//      return
-//    }
+    // NG: 以下のように配列からstructを取り出すとそれはコピーされた別の値なので変更しても配列内の要素には影響しない
+//    guard var oldTodo = todoList.first(where: { $0.id == newTodo.id }) else { return }
 //    oldTodo.title = newTodo.title
   }
   
@@ -79,10 +83,12 @@ final class Database {
 private extension Database {
   
   func saveTodoList() {
+    let data = try! JSONEncoder().encode(todoList)
+    let json = String(data: data, encoding: .utf8)!
     // Userdefaultに保存
-    try! UserDefaults.standard.set(
-      JSONEncoder().encode(todoList),
+    UserDefaults.standard.set(
+      json,
       forKey: key
-    )    
+    )
   }
 }
