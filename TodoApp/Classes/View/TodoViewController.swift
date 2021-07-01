@@ -38,17 +38,19 @@ final class TodoViewController: UITableViewController, UITextFieldDelegate {
   // MARK: Actions
   @IBAction func updateTodo(_ sender: Any) {
     guard titleLabel.text?.isEmpty == false,
-          var todo = self.todo, let title = titleLabel.text
+          let id = todo?.id,
+          let title = titleLabel.text
     else {
       fatalError()
     }
     
-    todo.title = title
-    todo.memo = memoTextView.text
-    todo.deadline = deadlineDatePicker.date
-    
-    Database.shared.update(todo)
-    NotificationCenter.default.post(name: .updateTodoList, object: nil)
+    try! Database.shared.updateTodo(
+      for: id
+    ) { [unowned self] todo in
+      todo.title = title
+      todo.memo = self.memoTextView.text
+      todo.deadline = self.deadlineDatePicker.date
+    }
     
     navigationController?.popViewController(animated: true)
   }

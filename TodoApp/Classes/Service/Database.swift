@@ -8,87 +8,137 @@
 import Foundation
 import RealmSwift
 
+/// - SeeAlso:
+///   - https://qiita.com/sagaraya/items/96708cd451021fb040b7
+///   - https://academy.realm.io/posts/nspredicate-cheatsheet/
 final class Database {
   
   static var shared = Database()
   private let realmConfiguration = Realm.Configuration(
-    schemaVersion: 1,
+    schemaVersion: 2,
     objectTypes: [
-      Todo.self
+      TodoList.self,
+      Todo.self,
     ]
   )
   
-  private(set) var todoList: [Todo] {
-    didSet {
-      saveTodoList()
-    }
+  private func realm() throws -> Realm {
+    return try .init(configuration: realmConfiguration)
   }
   
-  private init() {
-    if let json = UserDefaults.standard.string(forKey: key), let data = json.data(using: .utf8) {
-      todoList = try! JSONDecoder().decode([Todo].self, from: data)
-    } else {
-      todoList = []
+  private func todoList() throws -> TodoList {
+    let realm = try realm()
+    
+    // Realmに保存されているTodoListを取得
+    if let todoList = realm.object(ofType: TodoList.self, forPrimaryKey: TodoList.defaultID) {
+      return todoList
     }
+    
+    let todoList = TodoList()
+    print("\(#function) \(#line) todoList.realm: \(String(describing: todoList.realm))") // nil
+
+    // todoList.todos.append(Todo(title: "", memo: nil, deadline: Date()))
+    
+    try realm.write {
+      realm.add(todoList)
+    }
+
+     // realm.write を使わない場合
+//     realm.beginWrite()
+//     realm.add(todoList)
+//     try realm.commitWrite()
+    
+    print("\(#function) \(#line) todoList.realm: \(String(describing: todoList.realm))") // not nil
+    // 以下はトランザクション外の書き込みなのでランタイムエラー
+    // todoList.todos.append(Todo(title: "", memo: nil, deadline: Date()))
+    
+    return todoList
   }
   
-  // MARK: Static
+  // MARK: -
+  
   private let key = "todoList"
   
-  func deleteTodo(_ todo: Todo) {
-    guard let index = todoList.firstIndex(where: { $0.id == todo.id }) else {
-      fatalError()
-    }
-    todoList.remove(at: index)
+  var todoCount: Int {
+    return try! todoList().todos.count
   }
   
-  func moveTodo(from fromIndex: Int, to toIndex: Int) {
-    todoList.insert(
-      todoList.remove(at: fromIndex),
-      at: toIndex
-    )
-  }
+//  func todo(at index: Int) -> Todo {
+//    (try! todoList()).todos[index]
+//  }
   
-  func add(_ todo: Todo) {
-    todoList.append(todo)
-  }
-  
-  func update(_ newTodo: Todo) {
-    guard let index = todoList.firstIndex(where: { $0.id == newTodo.id }) else {
-      fatalError()
-    }
-    todoList.remove(at: index)
-    todoList.insert(newTodo, at: index)
+  func add(_ todo: Todo) throws {
+    let todoList = try todoList()
+    let realm = try realm()
     
-    // 別案: 配列内のstructを直接変更
-//    todoList[index].title = newTodo.title
-//    todoList[index].memo = newTodo.memo
-//    todoList[index].deadline = newTodo.deadline
-//    todoList[index].isDone = newTodo.isDone
-    
-    // NG: 以下のように配列からstructを取り出すとそれはコピーされた別の値なので変更しても配列内の要素には影響しない
-//    guard var oldTodo = todoList.first(where: { $0.id == newTodo.id }) else { return }
-//    oldTodo.title = newTodo.title
+    try realm.write {
+      todoList.todos.append(todo)
+    }
   }
   
-  func setIsDone(_ isDone: Bool, for id: UUID) {
-    guard let index = todoList.firstIndex(where: { $0.id == id }) else {
-      fatalError()
+  func deleteTodo(_ todo: Todo) throws {
+    assert(todo.realm != nil)
+    let realm = try realm()
+    
+    try realm.write {
+      realm.delete(todo)
     }
-    print("id: \(id), \(isDone)")
-    todoList[index].isDone = isDone
+  }
+  
+  func moveTodo(from fromIndex: Int, to toIndex: Int) throws {
+    let realm = try realm()
+    
+    try realm.write {
+      try todoList().todos.move(from: fromIndex, to: toIndex)
+    }
+    
+  }
+  
+  func updateTodo(
+    for id: String,
+    modificationHandler: (Todo) -> Void
+  ) throws {
+    let realm = try realm()
+    
+    try realm.write {
+      try modificationHandler(
+        fetchTodo(for: id)
+      )
+    }
+  }
+  
+  func update(_ todo: Todo) throws {
+    let todoList = try self.todoList()
+    let realm = try realm()
+    
+    try realm.write {
+      realm.add(todo, update: .modified)
+    }
+    
+    if todoList.todos.first(where: { $0.id == todo.id }) == nil {
+      try add(todo)
+    }
+  }
+  
+  func setIsDone(_ isDone: Bool, for id: String) throws {
+    let realm = try realm()
+    
+    try realm.write {
+      try fetchTodo(for: id).isDone = isDone
+    }
+  }
+  
+  func todos() throws -> List<Todo> {
+    return try todoList().todos
   }
 }
 
 private extension Database {
   
-  func saveTodoList() {
-    let data = try! JSONEncoder().encode(todoList)
-    let json = String(data: data, encoding: .utf8)!
-    // Userdefaultに保存
-    UserDefaults.standard.set(
-      json,
-      forKey: key
-    )
+  func fetchTodo(for id: String) throws -> Todo {
+    guard let todo = try realm().object(ofType: Todo.self, forPrimaryKey: id) else {
+      fatalError() // TODO: throw Error
+    }
+    return todo
   }
 }

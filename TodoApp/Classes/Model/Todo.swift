@@ -11,7 +11,7 @@ import RealmSwift
 /// - SeeAlso: https://docs.mongodb.com/realm/sdk/ios/data-types/supported-property-types/
 final class Todo: Object, Codable {
   
-  @objc private(set) dynamic var id = UUID()
+  @objc private(set) dynamic var id = UUID().uuidString
   @objc dynamic var title = ""
   @objc dynamic var memo: String?
   @objc dynamic var deadline = Date()
@@ -21,11 +21,12 @@ final class Todo: Object, Codable {
     return #keyPath(id)
   }
   
-  init(
+  convenience init(
     title: String,
     memo: String?,
     deadline: Date
   ) {
+    self.init()
     self.title = title
     self.memo = memo
     self.deadline = deadline

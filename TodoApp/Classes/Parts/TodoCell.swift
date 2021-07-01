@@ -12,7 +12,7 @@ import Reusable
 final class TodoCell: UITableViewCell, NibReusable {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var checkButton: UIButton!
-  private var id: UUID?
+  private var id: String?
   
   private var isDone = false {
     didSet {
@@ -43,6 +43,6 @@ final class TodoCell: UITableViewCell, NibReusable {
   @IBAction func buttonTapped(_ sender: UIButton) {
     isDone.toggle()
     guard let id = id else { return }
-    Database.shared.setIsDone(isDone, for: id)
+    try! Database.shared.setIsDone(isDone, for: id)
   }
 }

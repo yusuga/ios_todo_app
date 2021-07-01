@@ -48,8 +48,7 @@ final class TodoEditViewController: UITableViewController, UITextViewDelegate, U
         deadline: deadlineDatePicker.date
       )
       
-      Database.shared.add(todo)
-      NotificationCenter.default.post(name: .updateTodoList, object: nil)
+      try! Database.shared.add(todo)      
 
       dismiss(animated: true, completion: nil)
     }
